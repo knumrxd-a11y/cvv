@@ -95,22 +95,41 @@ h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify
 .nav button i{font-style:normal;font-size:20px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
 .nav button.on{color:var(--ink);font-weight:600}.nav button.on i{background:var(--red);color:#fff}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:12px 18px}
+.rd{display:flex;gap:12px;padding:11px 0;border-top:1px solid var(--line);font-size:16px;line-height:1.5}.rd b{flex:none;width:78px;color:var(--red);font-weight:600}
+.nav i{color:var(--ink)}.nav .on i{color:#fff}.nav i svg{display:block}.bell{color:#222}
+/* mutelu theme (subtle) */
+:root{--bg:#fbf6ec;--grey:#efe6d6;--card:#fffdf8;--ink:#2a1c18;--mute:#85776a;--line:#eadfca;--nav:#e4d8c0;--pink:#f7e6d4;--box:#fbf0e0;--gold:#D9A63A;--maroon:#6B1410}
+.hd{background:radial-gradient(circle at 88% 8%,#f2b63222 0 46px,transparent 47px),repeating-radial-gradient(circle at 88% 8%,#f2b6321c 0 1px,transparent 1px 16px),var(--maroon);border-bottom:2px solid var(--gold)}
+.mcard{box-shadow:inset 0 0 0 4px #b81f1a,inset 0 0 0 5px #f2b63266}
+.logo{outline-color:var(--gold)}.av,.bell{border:1.5px solid var(--gold)}.pav{border-color:var(--gold)}
+.big{border:1px solid #f2b63299}.ban{background:repeating-radial-gradient(circle at 100% 0,#ffffff14 0 1px,transparent 1px 12px),var(--red)}
+.bar2{border-bottom:3px solid var(--gold)}.f{border-left-color:var(--gold)}.box{border-top:3px solid var(--gold)}
+.vc{border-color:var(--gold)}.mine{box-shadow:inset 0 0 0 1px #f2b63266}
+.nav button.on i{background:var(--maroon);color:var(--gold)}
+#tarot.screen.on{background:repeating-radial-gradient(circle at 50% 26%,#f2b6321a 0 1px,transparent 1px 24px),radial-gradient(ellipse at 50% 28%,#7a1410,#1c0403)}
+.c{background:radial-gradient(circle,#f2b63240 0 14%,transparent 15%),repeating-radial-gradient(circle,#2a0907 0 6px,#3a0f0c 6px 12px);box-shadow:inset 0 0 0 4px #2a0907,inset 0 0 0 5px #f2b63299,0 8px 18px #0006}
+.c.flip{background:var(--gold)}
+.res{background:#fffaf0;border:4px double var(--gold)}.res .e{color:#b8862b}
+.dv{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:16px 12px 10px}
+.res .bl{display:block;letter-spacing:0;color:#8a6a2a;font-weight:400;font-size:14px}
+.lk{margin-top:12px;font-size:13px;background:#0003;border:1px solid #f2b63255;border-radius:12px;padding:8px 12px;text-align:center;font-weight:300}.lk b{color:var(--gold);font-weight:600}
 </style></head><body><div id="app">
 
 <section id="home" class="screen on">
- <div class="hd"><div class="who"><div class="av">😋</div><div><small>ยินดีต้อนรับ</small><b>สมาชิกตี๋น้อย</b></div><div class="bell">🔔</div></div>
+ <div class="hd"><div class="who"><div class="av">TN</div><div><small>ยินดีต้อนรับ</small><b>สมาชิกตี๋น้อย</b></div><div class="bell"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 17v-6a6 6 0 0112 0v6l2 2H4zM10 21h4"/></svg></div></div>
   <div class="mcard"><div class="logo">🍲</div><h2>Tn Family</h2><div class="t">Member</div><div class="row"><span>Member no.<br>TN••••••••</span><span>Valid till / หมดอายุ<br>[วันหมดอายุ]</span></div></div>
-  <div class="pts">2 / 60 คะแนน</div><div class="bar"><i></i></div><small class="s">สะสมอีก 58 คะแนน เพื่อเลื่อนขั้นเป็นระดับ SILVER</small></div>
- <div class="two"><button class="big" data-go="branches"><span>📍</span>สาขา &amp; การจอง</button><button class="big" data-go="tarot"><span>🃏</span>สุ่มไพ่ดูดวง</button></div>
+  <div class="pts" id="pts">2 / 60 คะแนน</div><div class="bar"><i id="pbar"></i></div><small class="s">สะสมอีก 58 คะแนน เพื่อเลื่อนขั้นเป็นระดับ SILVER</small><div class="lk" id="lk"></div></div>
+ <div class="two"><button class="big" data-go="branches">สาขา &amp; การจอง</button><button class="big" data-go="tarot">สุ่มไพ่ดูดวง</button></div>
  <div class="ban"><div class="logo" style="width:54px;height:54px;font-size:24px">🍲</div><div><b>สุกี้ตี๋น้อย อร่อยไม่อั้น</b><span>ไพ่ทุกใบ ชี้ไปที่หม้อเดียวกัน</span></div></div>
  <h3 class="sec">กิจกรรมของเรา <small>ดูทั้งหมด</small></h3>
- <div class="acts"><div class="act" data-go="tarot"><div class="im">🔮</div><p><b>Midnight Tarot</b><br>สุ่มไพ่ก่อนไปกิน<u>ดูรายละเอียด</u></p></div><div class="act" data-go="branches"><div class="im">👀</div><p><b>อ่านคำทำนายคิวอื่น</b><br>ระหว่างรอคิว<u>ดูรายละเอียด</u></p></div></div>
+ <div class="acts"><div class="act" data-go="tarot"><div class="im">✦</div><p><b>Midnight Tarot</b><br>สุ่มไพ่ก่อนไปกิน<u>ดูรายละเอียด</u></p></div><div class="act" data-go="branches"><div class="im">◎</div><p><b>อ่านคำทำนายคิวอื่น</b><br>ระหว่างรอคิว<u>ดูรายละเอียด</u></p></div><div class="act" data-go="fortune"><div class="im">☾</div><p><b>ดูดวงระหว่างรอ</b><br>จบด้วยมื้อที่ใช่<u>ดูเลย</u></p></div></div>
  <h3 class="sec">คูปองสุดพิเศษ <small>ดูทั้งหมด</small></h3><div id="homeCp"></div>
 </section>
 
 <section id="branches" class="screen">
- <div class="ph"><button class="back" data-go="home" aria-label="กลับ">‹</button><h2>สาขา &amp; การจอง</h2><button class="hist"><i>🕘</i>ประวัติการจองโต๊ะล่วงหน้า</button></div>
- <label class="srch">🔍<input id="sq" placeholder="ค้นหา"></label>
+ <div class="ph"><button class="back" data-go="home" aria-label="กลับ">‹</button><h2>สาขา &amp; การจอง</h2><button class="hist"><i>↺</i>ประวัติการจองโต๊ะล่วงหน้า</button></div>
+ <label class="srch"><input id="sq" placeholder="ค้นหา"></label>
  <div class="pills" id="pills"></div><div id="blist"></div>
 </section>
 
@@ -119,7 +138,7 @@ h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify
 </section>
 
 <section id="tarot" class="screen">
- <div class="tt"><h2>เลือกไพ่ 1 ใบ</h2><p>ให้จักรวาลเลือกให้</p></div>
+ <div class="tt"><h2>ตั้งจิต เลือกไพ่ 1 ใบ</h2><p>ให้จักรวาลเลือกให้</p></div>
  <div class="deck" id="deck"></div>
 </section>
 
@@ -131,15 +150,20 @@ h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify
 
 <section id="profile" class="screen">
  <div class="pf"></div>
- <div class="pfb"><div class="pav" style="position:absolute;left:50%;top:-64px;transform:translateX(-50%);margin:0">😋</div>
+ <div class="pfb"><div class="pav" style="position:absolute;left:50%;top:-64px;transform:translateX(-50%);margin:0">TN</div>
   <h2>สมาชิกตี๋น้อย</h2><small>09••••••••</small>
   <div style="margin-top:30px"><div class="mr">ข้อมูลส่วนตัว<i>›</i></div><div class="mr">ที่อยู่<i>›</i></div><div class="mr">คำถามที่พบบ่อย<i>›</i></div><div class="mr">ข้อกำหนดและเงื่อนไข<i>›</i></div><div class="mr">ภาษา<i>ไทย ▾</i></div></div>
   <button class="lg" id="lg">ออกจากระบบ</button><p class="demo">ออกจากระบบ หรือรีเฟรชหน้า = ล้างคิวและคำทำนายทั้งหมด</p></div>
 </section>
 
-<nav class="nav"><button class="on" data-go="home"><i>🏠</i>หน้าหลัก</button><button data-go="tarot"><i>🃏</i>สุ่มไพ่</button><button data-go="rewards"><i>🎁</i>รางวัลของฉัน</button><button data-go="profile"><i>👤</i>หน้าโปรไฟล์</button></nav>
+<section id="fortune" class="screen">
+ <div class="ph"><button class="back" data-go="home" aria-label="กลับ">‹</button><h2>ดูดวงระหว่างรอ</h2></div>
+ <div id="fst"></div>
+</section>
 
-<div class="ov" id="ov"><div class="res"><small id="rtag"></small><div class="e">🍲</div><p id="rtxt"></p><div class="bt"><button id="rshare">แชร์</button><button class="o" id="rq">ดูคิว</button></div><button class="o" id="rag" style="width:100%;margin-top:10px">สุ่มใหม่</button></div></div>
+<nav class="nav"><button class="on" data-go="home"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></i>หน้าหลัก</button><button data-go="tarot"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></i>สุ่มไพ่</button><button data-go="rewards"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M12 8v13M3 12h18M12 8c-3-5-7-2-4 0M12 8c3-5 7-2 4 0"/></svg></i>รางวัลของฉัน</button><button data-go="profile"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></i>หน้าโปรไฟล์</button></nav>
+
+<div class="ov" id="ov"><div class="res"><small id="rtag"></small><div class="e">✦</div><p id="rtxt"></p><div class="dv"></div><small class="bl">ขอให้สมหวังดังที่ตั้งจิตอธิษฐาน</small><div class="bt"><button id="rshare">แชร์</button><button class="o" id="rq">ดูคิว</button></div><button class="o" id="rag" style="width:100%;margin-top:10px">สุ่มใหม่</button></div></div>
 <div class="ov" id="sheet"><div class="res"><h3 id="sn"></h3><p class="sub" id="sd"></p><div class="step"><span>จำนวนลูกค้า</span><div><button id="mi">−</button><b id="pc">1</b><button id="pl">+</button></div></div><div class="bt" style="margin-top:22px"><button class="o" id="sc">ปิด</button><button id="sg">รับคิว</button></div></div></div>
 </div>
 <script>
@@ -159,7 +183,7 @@ var M=[["ยิ่งรู้จัก ยิ่งหิว","ยิ่งก�
 ["ปัญหาชีวิตมีเป็นร้อย","แต่ปัญหาที่แก้ได้ทันที","คือการหาอะไรกิน","ไปตี๋น้อยกันไหม?"],
 ["เรื่องอื่นเอาไว้ก่อน","เรื่องงานเอาไว้ทีหลัง","ตอนนี้มีเรื่องเดียวที่สำคัญ","กินอะไรดี?"],
 ["ไพ่บอกว่าในช่วงนี้","คุณอาจกำลังต้องการความสุข","ต้องการใครสักคนอยู่ข้างๆ","และที่สำคัญที่สุด","คุณกำลังต้องการหมูสามชั้น","ไพ่แนะนำให้ไปตี๋น้อย"]];
-var T=["THE POT","THE EGG","THE FLAME","THE CHOPSTICKS","THE SAUCE","THE QUEUE","THE FOOL"],E=["🍲","🥚","🔥","🥢","🌶️","🎟️","🃏"];
+var T=["THE POT","THE EGG","THE FLAME","THE CHOPSTICKS","THE SAUCE","THE QUEUE","THE FOOL"],E=["✦","✦","✦","✦","✦","✦","✦"];
 var BR=[["สุกี้ตี๋น้อย บ้านบางเขน","0.7",4],["สุกี้ตี๋น้อย เกษตรนวมินทร์","3.0",2],["สุกี้ตี๋น้อย รามอินทรา 23","3.1",0],["สุกี้ตี๋น้อย เมเจอร์ รัชโยธิน","5.1",7],["สุกี้ตี๋น้อย ลาดพร้าว-วังหิน","5.6",3],["สุกี้ตี๋น้อย พหลโยธิน 19","6.2",1]];
 var PL=["All","สุกี้ตี๋น้อย","ตี๋น้อย บาร์บีคิว","ตี๋น้อยโกลด์"];
 var $=function(i){return document.getElementById(i)};
@@ -170,17 +194,17 @@ function pad(n,w){n=String(n);while(n.length<(w||2))n="0"+n;return n}
 function qn(n){return "A"+pad(n,3)}
 var cur="home";
 function go(n){cur=n;document.querySelectorAll(".screen").forEach(function(s){s.classList.toggle("on",s.id===n)});
- var nv=n==="branches"||n==="queue"?"home":n;
+ var nv=n==="branches"||n==="queue"||n==="fortune"?"home":n;
  document.querySelectorAll(".nav button").forEach(function(b){b.classList.toggle("on",b.dataset.go===nv)});
  document.body.classList.toggle("grey",n==="queue");window.scrollTo(0,0);
- if(n==="tarot")deal();if(n==="branches")rBranches();if(n==="queue")rQueue();if(n==="rewards"||n==="home")rCp()}
+ if(n==="tarot")deal();if(n==="branches")rBranches();if(n==="queue")rQueue();if(n==="rewards"||n==="home")rCp();if(n==="fortune")fMenu()}
 document.addEventListener("click",function(e){var g=e.target.closest("[data-go]");if(g)go(g.dataset.go)});
 /* branches */
 function rBranches(){
  $("pills").innerHTML=PL.map(function(p){return '<button class="pill'+(p===S.pill?" on":"")+'" data-p="'+p+'">'+p+"</button>"}).join("");
  var q=$("sq").value.trim(),h="";
  BR.forEach(function(b,i){if(S.pill!=="All"&&S.pill!=="สุกี้ตี๋น้อย")return;if(q&&b[0].indexOf(q)<0)return;
-  h+='<button class="br" data-b="'+i+'"><b>📍 '+b[0]+'</b><div><span>'+b[1]+' กม.</span><em>จำนวนคิว '+b[2]+' คิว</em></div></button>'});
+  h+='<button class="br" data-b="'+i+'"><b>'+b[0]+'</b><div><span>'+b[1]+' กม.</span><em>จำนวนคิว '+b[2]+' คิว</em></div></button>'});
  $("blist").innerHTML=(h||'<div class="empty"><b>ไม่พบสาขา</b></div>')+'<p class="demo">จำนวนคิวเป็นข้อมูลตัวอย่าง</p>'}
 $("pills").addEventListener("click",function(e){var p=e.target.dataset.p;if(p){S.pill=p;rBranches()}});
 $("sq").addEventListener("input",rBranches);
@@ -199,12 +223,12 @@ function start(){clearInterval(timer);timer=setInterval(function(){if(!S.q||S.q.
 /* queue */
 function d2(t){return pad(t.getDate())+"/"+pad(t.getMonth()+1)+"/"+t.getFullYear()+" "+pad(t.getHours())+":"+pad(t.getMinutes())+":"+pad(t.getSeconds())}
 function rQueue(){var q=S.q,el=$("qbody");
- if(!q){el.innerHTML='<div class="empty"><div class="tk">🎟️</div><b>ยังไม่มีคิว</b>เลือกสาขาและกดรับคิวก่อน<button class="link" data-go="branches">สาขา &amp; การจอง</button></div>';return}
- var w=Math.max(0,q.num-q.cur-1),mine=S.mine?'<div class="mine"><small>คำทำนายของคุณ · '+S.mine.t+'</small><p>'+html(S.mine.l)+'</p></div>':'<button class="link" data-go="tarot">🃏 สุ่มไพ่ระหว่างรอ</button>';
+ if(!q){el.innerHTML='<div class="empty"><div class="tk">✦</div><b>ยังไม่มีคิว</b>เลือกสาขาและกดรับคิวก่อน<button class="link" data-go="branches">สาขา &amp; การจอง</button></div>';return}
+ var w=Math.max(0,q.num-q.cur-1),mine=S.mine?'<div class="mine"><small>คำทำนายของคุณ · '+S.mine.t+'</small><p>'+html(S.mine.l)+'</p></div>':'<button class="link" data-go="tarot">สุ่มไพ่ระหว่างรอ</button>';
  var f=S.feed.slice(0,8).map(function(x){return '<div class="f"><div class="top"><b>คิว '+qn(x.n)+'</b><span>'+x.r.e+" "+x.r.t+'</span></div><p>'+html(x.r.l)+"</p></div>"}).join("");
- el.innerHTML='<div class="box"><div class="bh"><div class="logo">🍲</div><div><b>'+q.b+'</b><small>📍 Teenoi Family</small><small>🕒 คิวทั้งหมด: <em>'+(w+1)+' คิว</em></small></div></div>'
+ el.innerHTML='<div class="box"><div class="bh"><div class="logo">🍲</div><div><b>'+q.b+'</b><small>Teenoi Family</small><small>คิวทั้งหมด: <em>'+(w+1)+' คิว</em></small></div></div>'
  +'<div class="qrow"><div class="q me"><small>คิวของคุณ</small><b>'+qn(q.num)+'</b></div><div class="q"><small>คิวปัจจุบัน</small><b class="s">'+qn(q.cur)+'</b><hr><small>รอคิว</small><b class="s">'+w+'</b></div></div>'
- +(q.cur>=q.num?'<div class="go"><b>ถึงคิวของคุณแล้ว 🎉</b>เชิญที่ร้านได้เลย</div>':'')+mine
+ +(q.cur>=q.num?'<div class="go"><b>ถึงคิวของคุณแล้ว</b>เชิญที่ร้านได้เลย</div>':'')+mine+'<button class="link" data-go="fortune">ดูดวงระหว่างรอ</button>'
  +'<div class="dt"><div class="d">'+d2(q.t)+'</div><div class="r"><span>ประเภท</span><span>A</span></div><div class="r"><span>จำนวนลูกค้า</span><span>'+q.n+'</span></div><p>* ขอสงวนสิทธิ์ในการข้ามคิวหากลูกค้าไม่มาแสดงตน</p><p>* ขอสงวนสิทธิ์การยกเลิกเมื่อมีการซื้อขายหรือแลกเปลี่ยน</p></div><button class="cx" id="cx">ยกเลิกคิว</button></div>'
  +'<div class="fs"><h3>คิวอื่นๆ ได้คำทำนายว่า</h3><small>ข้อมูลตัวอย่าง</small></div>'+f;
  $("cx").onclick=function(){if(confirm("ยกเลิกคิวนี้ใช่ไหม")){S.q=null;S.feed=[];clearInterval(timer);go("branches")}}}
@@ -214,14 +238,80 @@ function draw(e){var c=e.currentTarget;if(document.querySelector(".c.flip"))retu
  var r=pick();S.mine=r;setTimeout(function(){$("rtag").textContent=r.t;document.querySelector("#ov .e").textContent=r.e;$("rtxt").innerHTML=html(r.l);$("ov").classList.add("on");rCp()},750)}
 $("ov").addEventListener("click",function(e){if(e.target===$("ov")||e.target.id==="rag"){$("ov").classList.remove("on");deal()}});
 $("rq").onclick=function(){$("ov").classList.remove("on");go(S.q?"queue":"branches")};
-$("rshare").onclick=function(){var t="ฉันสุ่มไพ่ Teenoi Midnight Tarot ได้ "+S.mine.t+" ดวงบอกให้ไปตี๋น้อย 🍲";if(navigator.share){navigator.share({text:t})}else{alert("ข้อความสำหรับแชร์:\n"+t)}};
+$("rshare").onclick=function(){var t="ฉันสุ่มไพ่ Teenoi Midnight Tarot ได้ "+S.mine.t+" ดวงบอกให้ไปตี๋น้อย";if(navigator.share){navigator.share({text:t})}else{alert("ข้อความสำหรับแชร์:\n"+t)}};
 /* rewards */
 var used=false;
-function rCp(){var v='<div class="vc"><b>🧧 ยันต์เสริมดวง</b><p>สิทธิพิเศษจากการสุ่มไพ่ [รายละเอียดตามที่ร้านกำหนด] · ตัวอย่าง</p></div>',
- em='<div class="empty"><div class="tk">🎫</div><b>ยังไม่มีคูปองในขณะนี้</b>เรากำลังรวบรวมคูปองพิเศษให้คุณ<br>สุ่มไพ่เพื่อรับยันต์เสริมดวง</div>';
+function rCp(){var v='<div class="vc"><b>ยันต์เสริมดวง</b><p>สิทธิพิเศษจากการสุ่มไพ่ [รายละเอียดตามที่ร้านกำหนด] · ตัวอย่าง</p></div>',
+ em='<div class="empty"><div class="tk">✦</div><b>ยังไม่มีคูปองในขณะนี้</b>เรากำลังรวบรวมคูปองพิเศษให้คุณ<br>สุ่มไพ่เพื่อรับยันต์เสริมดวง</div>';
  $("homeCp").innerHTML=S.mine?v:em;$("rcp").innerHTML=used?em:(S.mine?v:em);$("rc").textContent="มีคูปอง "+(!used&&S.mine?1:0)+" ใบ"}
 $("t1").onclick=function(){used=false;$("t1").className="on";$("t2").className="";rCp()};
 $("t2").onclick=function(){used=true;$("t2").className="on";$("t1").className="";rCp()};
 $("lg").onclick=function(){clearInterval(timer);S={mine:null,q:null,feed:[],pill:"All",pick:null,pc:1};used=false;$("sq").value="";go("home")};
 rCp();
+/* fortune while waiting */
+var RL=["ความรัก","การเงิน","การงาน"];
+var DY=[["วันอาทิตย์","มีคนใส่ใจคุณอยู่ใกล้ๆ มากกว่าที่คิด","เงินเข้าดี แต่ระวังรายจ่ายตอนหิว","งานราบรื่น ถ้าพักกินข้าวตรงเวลา"],
+["วันจันทร์","ความรักเริ่มนุ่มนวลขึ้น ถ้าใจเย็นลง","เงินนิ่งๆ ไม่ต้องกังวล","งานหนักช่วงนี้ แต่เหนื่อยแล้วมีรางวัล"],
+["วันอังคาร","คนโสดมีโอกาสได้คุยกับคนถูกใจ","มีเกณฑ์ได้ของฟรีหรือส่วนลด","ตัดสินใจเร็วได้ผลดี"],
+["วันพุธ","คำพูดดีๆ ทำให้ความสัมพันธ์ดีขึ้น","ใช้จ่ายสมเหตุสมผล มีเงินเหลือเก็บ","ไอเดียใหม่เข้ามาให้ลองทำ"],
+["วันพฤหัสบดี","ได้เจอคนที่ทำให้ยิ้มได้ง่าย","โชคลาภเล็กๆ มาเยือน","ผู้ใหญ่ช่วยสนับสนุนงานของคุณ"],
+["วันศุกร์","ความรักหวานกว่าที่คิด","การเงินดี เหมาะกับการเลี้ยงคนใกล้ตัว","งานเสร็จตรงเวลา ได้พักสมใจ"],
+["วันเสาร์","ช่วงนี้อยากมีเพื่อนข้างๆ มากกว่าปกติ","ระวังใช้จ่ายเกินตัว แต่มื้ออร่อยไม่นับ","งานช้าหน่อย แต่มั่นคง"]];
+var MN=[["คนรักหมูสามชั้น","ใจเข้มแข็งแต่ซ่อนความอ่อนโยน","การเงินสดใสตามความมั่นใจ","ทำงานเป็นระบบ ใครก็ไว้ใจ"],
+["คนรักเนื้อสไลซ์","เป็นคนจริงใจ ใครอยู่ด้วยก็สบายใจ","เงินมาจากความตั้งใจ","เหมาะกับงานที่ต้องใช้ความละเอียด"],
+["คนรักอาหารทะเล","โรแมนติก ชอบบรรยากาศดีๆ","มีโชคด้านการลงทุนเล็กๆ","ความคิดสร้างสรรค์กำลังมา"],
+["คนรักผักและเห็ด","ใจดี เป็นที่พึ่งของเพื่อนฝูง","ใช้เงินรอบคอบ ไม่เดือดร้อน","งานสมดุล ชีวิตสมดุล"]];
+var QN=[["เลขนำโชคแห่งความอบอุ่น","มีคนคิดถึงคุณอยู่","เงินเล็กๆ น้อยๆ ไหลมาเทมา","งานหนักแต่มีคนช่วย"],
+["เลขนำโชคแห่งโอกาส","ได้พบเรื่องน่าประหลาดใจ","มีโชคจากสิ่งที่ไม่คาดคิด","เริ่มต้นสิ่งใหม่ได้ดี"],
+["เลขนำโชคแห่งความมั่นคง","ความสัมพันธ์ลงตัว","เงินเก็บงอกเงยช้าๆ แต่แน่น","งานเดินหน้าอย่างราบรื่น"],
+["เลขนำโชคแห่งความสุข","เสียงหัวเราะอยู่ใกล้ตัว","ใช้เงินกับสิ่งที่ทำให้ยิ้มได้","พักสักนิด ไอเดียจะมาเอง"]];
+var CN=[["ทุกอย่างในดวงชี้ไปทางเดียวกัน","คืนนี้คุณสมควรได้กินอิ่มๆ","มากินตี๋น้อยด้วยกันนะ"],
+["ดวงของคุณกำลังดี","และจะดียิ่งขึ้นถ้าได้อยู่หน้าหม้อสุกี้","มากินตี๋น้อยกันเถอะ"],
+["ไพ่ทุกใบ ดวงทุกแบบ","ลงท้ายที่เรื่องเดียวกัน","ชวนคนที่คุณรักมากินตี๋น้อย"],
+["ดวงบอกว่าความสุขของคุณคืนนี้","อยู่ในหม้อที่กำลังเดือด","ไปตี๋น้อยด้วยกันนะ"]];
+var CT=[["l","ความรัก","เรื่องหัวใจ คนคุย คนรัก คนข้างตัว"],["w","การงาน","งาน เรียน เงินทอง"],["i","การหาไอเดีย","ติดปัญหา อยากได้แรงบันดาลใจ"],["o","ถามคำถามอื่นๆ","พิมพ์ถามไพ่ได้ทุกเรื่อง"]];
+var RD={l:[["ไพ่แห่งหม้อร้อน","ความรักกำลังอุ่นขึ้นช้าๆ เหมือนน้ำซุปที่กำลังจะเดือด","อย่ารีบ ให้เวลากับคนที่ใช่"],
+["ไพ่แห่งการนัดพบ","มีโอกาสได้เจอหรือได้คุยกับคนสำคัญเร็วๆ นี้","ชวนเขามานั่งกินข้าวด้วยกัน"],
+["ไพ่แห่งความจริงใจ","คนที่อยู่ข้างคุณตอนนี้จริงใจกว่าที่เห็น","เปิดใจและพูดตรงๆ ให้มากขึ้น"],
+["ไพ่แห่งการปล่อยวาง","เรื่องเก่ากำลังผ่านไป เรื่องใหม่กำลังรออยู่","ดูแลตัวเองให้ดีก่อน"]],
+w:[["ไพ่แห่งความตั้งใจ","งานที่ทำอยู่กำลังเห็นผล แม้ยังไม่มีใครพูดถึง","ทำต่อไป อย่าเพิ่งท้อ"],
+["ไพ่แห่งโอกาส","มีข่าวดีเรื่องงานเข้ามาแบบไม่คาดคิด","ตอบรับสิ่งใหม่ด้วยความกล้า"],
+["ไพ่แห่งผู้ใหญ่ใจดี","คนมีประสบการณ์พร้อมช่วยคุณอยู่","ขอคำแนะนำ อย่าแบกคนเดียว"],
+["ไพ่แห่งการพักผ่อน","สมองล้าเกินไป ผลงานจะดีขึ้นถ้าได้พักจริงๆ","ปิดงานแล้วไปกินของอร่อยๆ"]],
+i:[["ไพ่แห่งความคิดสร้างสรรค์","ไอเดียดีๆ มักมาตอนที่เราหยุดบีบสมอง","ออกไปเจอผู้คนหรือบรรยากาศใหม่"],
+["ไพ่แห่งการแบ่งปัน","คำตอบอยู่ในบทสนทนากับคนข้างตัว","ลองเล่าปัญหาให้ใครสักคนฟัง"],
+["ไพ่แห่งการลงมือ","ไอเดียที่ดีที่สุดคือไอเดียที่เริ่มทำแล้ว","เริ่มจากก้าวเล็กๆ วันนี้เลย"],
+["ไพ่แห่งความอิ่ม","สมองที่หิวคิดอะไรไม่ออก","เติมพลังก่อน แล้วค่อยกลับมาคิด"]]};
+var AN=[["ใช่ เลย","ไพ่เห็นด้วย ทุกอย่างกำลังเอื้อให้คุณ"],["น่าจะใช่","เตรียมตัวอีกนิด ผลจะออกมาดี"],["ยังก่อน","รออีกหน่อย จังหวะที่ดีกำลังมา"],["ลองดูได้","ไม่มีอะไรเสียหาย ถ้าลองด้วยใจสบายๆ"],["ฟังใจตัวเอง","คำตอบอยู่กับคุณอยู่แล้ว ไพ่แค่ช่วยยืนยัน"]];
+var QS=["วันนี้ควรสั่งหมูเพิ่มไหม","ควรชวนเพื่อนมากินด้วยไหม","ควรเริ่มเรื่องใหม่ไหม"];
+function esc(t){return t.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function pk(a){return a[Math.floor(Math.random()*a.length)]}
+function fTail(){var c=pk(CN);S.fz=c[c.length-1];return '<div class="mine" style="margin:12px 16px 0"><small>สรุปจากดวงของคุณ</small><p>'+html(c)+'</p></div>'
+ +'<div style="padding:0 16px"><button class="link" data-go="'+(S.q?"queue":"branches")+'">'+(S.q?"กลับไปดูคิวของฉัน":"รับคิวตี๋น้อยที่สาขา")+'</button>'
+ +'<button class="link" style="background:var(--pink);color:#e0584f" data-f="share">แชร์คำทำนาย</button><button class="link" style="background:none;color:var(--mute)" data-f="back">ถามเรื่องอื่น</button></div>'}
+function fMenu(){var q=S.q;$("fst").innerHTML='<h3 class="sec" style="margin:12px 18px 10px">อยากถามเรื่องอะไร</h3>'
+ +CT.map(function(c){return '<button class="br" data-c="'+c[0]+'"><b>'+c[1]+'</b><div><span>'+c[2]+'</span></div></button>'}).join("")
+ +'<h3 class="sec" style="margin:22px 18px 10px">หรือดูดวงภาพรวม</h3>'
+ +'<button class="br" data-f="d"><b>ดวงตามวันเกิด</b><div><span>เลือกวันที่คุณเกิด</span></div></button>'
+ +'<button class="br" data-f="m"><b>ดวงตามเมนูโปรด</b><div><span>เลือกเมนูที่คุณชอบในหม้อ</span></div></button>'
+ +'<button class="br" data-f="q"><b>ดวงจากหมายเลขคิว</b><div><span>'+(q?"คิว "+qn(q.num):"เลขนำโชคของวันนี้")+'</span></div></button>'}
+function fCat(k){var n=CT.filter(function(x){return x[0]===k})[0][1];$("fst").innerHTML='<p class="demo" style="margin-top:12px">ตั้งจิตอธิษฐานเรื่อง'+n+' แล้วเลือกไพ่ 1 ใบ</p><div class="deck" id="fd" style="flex:none;padding:8px 22px">'+[0,1,2].map(function(j){return '<button class="c" data-k="'+k+'" data-j="'+j+'">✦</button>'}).join("")+'</div>'}
+function fRes(k){var e=pk(RD[k]),n=CT.filter(function(x){return x[0]===k})[0][1];
+ $("fst").innerHTML='<div class="box"><small style="color:var(--mute)">ถามเรื่อง'+n+'</small><h3 style="font-size:24px;margin:2px 0 8px;font-weight:600">'+e[0]+'</h3><div class="rd"><b>คำทำนาย</b><span>'+e[1]+'</span></div><div class="rd"><b>คำแนะนำ</b><span>'+e[2]+'</span></div></div>'+fTail()}
+function fAskUI(){$("fst").innerHTML='<div class="box" style="margin-top:14px"><b style="font-size:19px">พิมพ์คำถามของคุณ</b><input id="fq" maxlength="80" placeholder="เช่น ควรเริ่มเรื่องใหม่ไหม" style="width:100%;margin-top:10px;padding:12px 16px;border:2px solid var(--line);border-radius:14px;background:none;color:var(--ink);font:400 17px Kanit;outline:none"><div class="chips" style="margin:12px 0 0">'+QS.map(function(x){return '<button class="pill" data-q="'+x+'">'+x+'</button>'}).join("")+'</div><button class="link" data-f="ask">ถามไพ่</button></div>'}
+function fAnswer(){var q=$("fq").value.trim();if(!q){$("fq").focus();return}var a=pk(AN);
+ $("fst").innerHTML='<div class="box"><small style="color:var(--mute)">คำถามของคุณ</small><p style="font-size:18px;margin:4px 0 10px">'+esc(q)+'</p><h3 style="font-size:26px;font-weight:600;color:var(--red)">'+a[0]+'</h3><div class="rd" style="margin-top:8px"><b>ไพ่บอกว่า</b><span>'+a[1]+'</span></div></div>'+fTail()}
+function fChips(t){var L=t==="d"?DY:MN;$("fst").innerHTML='<p class="demo" style="margin-top:8px">'+(t==="d"?"คุณเกิดวันอะไร":"เมนูโปรดของคุณคือ")+'</p><div class="chips">'+L.map(function(x,i){return '<button class="pill" data-t="'+t+'" data-i="'+i+'">'+(t==="d"?x[0]:x[0].replace("คนรัก",""))+'</button>'}).join("")+'</div>'}
+function fShow(t,i){var e,tag,n=S.q?S.q.num:10+Math.floor(Math.random()*90);
+ if(t==="d"){e=DY[i];tag="ดวงตามวันเกิด"}else if(t==="m"){e=MN[i];tag="ดวงตามเมนูโปรด"}else{e=QN[n%4];tag="ดวงจากหมายเลขคิว "+(S.q?qn(n):n)}
+ $("fst").innerHTML='<div class="box"><small style="color:var(--mute)">'+tag+'</small><h3 style="font-size:24px;margin:2px 0 8px;font-weight:600">'+e[0]+'</h3>'+RL.map(function(l,k){return '<div class="rd"><b>'+l+'</b><span>'+e[k+1]+'</span></div>'}).join("")+'</div>'
+ +fTail()}
+$("fst").addEventListener("click",function(e){var b=e.target.closest("[data-f],[data-i],[data-c],[data-j],[data-q]");if(!b)return;var d=b.dataset;
+ if(d.q){$("fq").value=d.q;return}
+ if(d.j!=null){var fd=$("fd");if(fd.dataset.on)return;fd.dataset.on=1;b.classList.add("flip");b.textContent=" ";setTimeout(function(){fRes(d.k)},650);return}
+ if(d.c){if(d.c==="o")fAskUI();else fCat(d.c);return}
+ if(d.i!=null){fShow(d.t,+d.i);return}
+ var f=d.f;if(f==="back")fMenu();else if(f==="ask")fAnswer();else if(f==="share"){var t="ดวงของฉันบอกให้ไปกินตี๋น้อย: "+S.fz;if(navigator.share)navigator.share({text:t});else alert("ข้อความสำหรับแชร์:\n"+t)}
+ else if(f==="q")fShow("q");else fChips(f)});
+(function(){var d=new Date(),C=["แดง","เหลือง","ชมพู","เขียว","ส้ม","ฟ้า","ม่วง"];$("lk").innerHTML='สีมงคลวันนี้ <b>'+C[d.getDay()]+'</b> · เลขนำโชค <b>'+((d.getDate()*7+d.getMonth())%9+1)+'</b>'})();
 </script></body></html>

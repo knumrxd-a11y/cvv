@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="th"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teenoi Family × Midnight Tarot</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--grey:#E6E6E9;--card:#fff;--ink:#222;--mute:#777;--red:#D32D27;--maroon:#7A1410;--gold:#F2B632;--line:#e6e6ea;--nav:#B9BCC8;--pink:#fae3e2;--box:#fff0ef}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171212;--grey:#120d0d;--card:#241c1c;--ink:#f3ece6;--mute:#a59a94;--line:#3a2e2e;--nav:#2a2222;--pink:#3a1f1d;--box:#3a1f1d}}
+:root[data-theme="dark"]{--bg:#171212;--grey:#120d0d;--card:#241c1c;--ink:#f3ece6;--mute:#a59a94;--line:#3a2e2e;--nav:#2a2222;--pink:#3a1f1d;--box:#3a1f1d}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+:root{padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--ink);font-family:Kanit,sans-serif;font-weight:400}
+body.grey{background:var(--grey)}
+button{font-family:inherit}
+#app{max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+.screen{display:none}.screen.on{display:block}
+.logo{width:64px;height:64px;border-radius:50%;background:var(--red);border:4px solid #111;outline:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:30px;flex:none}
+.hd{background:var(--maroon);color:#fff;padding:20px 20px 28px;border-radius:0 0 32px 32px}
+.who{display:flex;gap:14px;align-items:center;margin-bottom:18px}.who>div:nth-child(2){flex:1}
+.av{width:52px;height:52px;border-radius:50%;background:#fff3;display:flex;align-items:center;justify-content:center;font-size:26px}
+.bell{width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}
+.who small{opacity:.8;font-weight:300;display:block}.who b{font-size:20px;font-weight:600}
+.mcard{background:linear-gradient(135deg,#e23a34,#b81f1a);border-radius:22px;padding:22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.mcard h2{font-size:30px;font-weight:500;line-height:1.1}.mcard .t{font-size:26px;font-weight:600}
+.mcard .row{display:flex;justify-content:space-between;width:100%;font-size:13px;margin-top:8px;font-weight:300;text-align:left}
+.pts{margin-top:18px;font-size:22px;font-weight:600}.bar{height:12px;border-radius:9px;background:#1c1c1c;margin:8px 0}.bar i{display:block;height:100%;width:6%;background:var(--gold);border-radius:9px}
+.hd small.s{font-size:12px;opacity:.85;font-weight:300}
+.two{display:flex;gap:12px;margin-top:-18px;padding:0 18px;position:relative}
+.big{flex:1;border:0;background:var(--red);color:#fff;font-size:16px;font-weight:600;border-radius:18px;padding:18px 10px;box-shadow:0 6px 14px #d32d2740;cursor:pointer;display:flex;gap:10px;align-items:center;justify-content:center}
+.big span{width:34px;height:34px;border-radius:50%;background:#fbe3b8;display:flex;align-items:center;justify-content:center}
+.ban{margin:16px 18px 0;border-radius:20px;background:var(--red);color:#fff;padding:22px;display:flex;gap:14px;align-items:center}
+.ban b{font-size:22px;line-height:1.25;font-weight:600}.ban span{font-weight:300;font-size:14px;display:block;margin-top:4px}
+h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify-content:space-between;align-items:baseline}h3.sec small{font-size:14px;font-weight:400}
+.acts{display:flex;gap:12px;padding:0 18px 6px;overflow-x:auto}
+.act{flex:0 0 150px;background:var(--card);border-radius:18px;overflow:hidden;box-shadow:0 2px 8px #0002;cursor:pointer}
+.act .im{height:120px;display:flex;align-items:center;justify-content:center;font-size:44px;background:linear-gradient(135deg,#e23a34,#7A1410);color:#fff}
+.act p{padding:10px 12px 12px;font-size:14px;line-height:1.35}.act p u{display:block;text-align:right;color:var(--red);text-decoration:none;margin-top:6px}
+.empty{text-align:center;color:var(--mute);padding:26px 24px;font-weight:300}.empty b{display:block;color:var(--ink);font-size:20px;font-weight:500;margin:8px 0}.empty .tk{font-size:64px;opacity:.5}
+.ph{display:flex;align-items:center;gap:12px;padding:16px 18px 8px}.ph h2{flex:1;font-size:26px;font-weight:600}
+.back{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:22px;cursor:pointer}
+.hist{background:none;border:0;color:var(--ink);font-size:11px;text-align:center;cursor:default}.hist i{display:block;font-style:normal;color:var(--red);font-size:22px}
+.srch{margin:12px 18px;border:2px solid var(--ink);border-radius:30px;padding:0 18px;display:flex;align-items:center;gap:10px;height:54px}
+.srch input{flex:1;border:0;background:none;font:400 17px Kanit;color:var(--ink);outline:none}
+.pills{display:flex;gap:10px;padding:0 18px 12px;overflow-x:auto}
+.pill{flex:none;border:1.5px solid var(--line);border-radius:26px;background:var(--card);color:var(--mute);padding:8px 18px;font-size:15px;cursor:pointer}.pill.on{background:var(--pink);border-color:var(--red);color:var(--red)}
+.br{display:block;width:calc(100% - 36px);margin:0 18px 14px;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:16px 18px;text-align:left;color:var(--ink);cursor:pointer;box-shadow:0 2px 8px #0001}
+.br b{font-size:20px;font-weight:500;display:block;margin-bottom:12px}.br div{display:flex;justify-content:space-between;font-size:18px}.br em{font-style:normal;color:var(--red);font-weight:500}
+.bar2{background:var(--red);color:#fff;text-align:center;padding:20px;font-size:23px;font-weight:600}
+.box{background:var(--card);border-radius:20px;margin:16px 16px 0;padding:18px;box-shadow:0 2px 8px #0001}
+.bh{display:flex;gap:14px;align-items:center}.bh .logo{width:76px;height:76px;font-size:34px}.bh b{font-size:21px;font-weight:600;display:block}.bh small{color:var(--mute);font-size:16px;display:block}.bh em{font-style:normal;color:var(--ink);font-weight:600}
+.qrow{display:flex;gap:10px;margin-top:16px}.q{flex:1;border:2px dashed var(--line);border-radius:22px;padding:14px;text-align:center;display:flex;flex-direction:column;justify-content:center}
+.q small{color:var(--mute);font-size:16px}.q b{font-size:56px;line-height:1.1;font-weight:700;color:#555}.q.me b{color:var(--red)}
+.q hr{border:0;border-top:2px solid var(--line);margin:8px 8px}.q b.s{font-size:44px}
+.dt{border:2px solid var(--line);border-radius:22px;margin-top:12px;padding:16px}.dt .d{text-align:right;font-size:19px;color:var(--mute);font-weight:500;margin-bottom:12px}
+.dt .r{display:flex;justify-content:space-between;font-size:24px;font-weight:600;margin:10px 0}
+.dt p{color:#e0584f;font-size:16px;line-height:1.5;margin-top:12px}
+.cx{width:100%;margin-top:14px;border:0;background:var(--pink);color:#e0584f;font-size:25px;font-weight:600;border-radius:18px;padding:14px;cursor:pointer}
+.go{background:var(--maroon);color:#fff;border-radius:22px;padding:18px;text-align:center;margin-top:12px}.go b{font-size:22px;display:block}
+.fs{display:flex;justify-content:space-between;align-items:center;margin:22px 18px 10px}.fs h3{font-size:20px;font-weight:600}.fs small{color:var(--mute);font-size:12px}
+.f{background:var(--card);border-left:5px solid var(--red);border-radius:14px;margin:0 16px 10px;padding:12px 14px;box-shadow:0 1px 6px #0001;animation:in .5s}
+@keyframes in{from{opacity:0;transform:translateY(-8px)}}
+.f .top{display:flex;justify-content:space-between;font-size:12px;color:var(--mute);margin-bottom:4px}.f .top b{color:var(--red);font-weight:600;font-size:14px}
+.f p{font-size:15px;line-height:1.5}.f p em{font-style:normal;color:var(--red);font-weight:600}
+.mine{background:linear-gradient(135deg,var(--maroon),#a02019);color:#fff;border-radius:20px;margin:12px 0 0;padding:18px}
+.mine small{opacity:.8}.mine p{font-size:18px;line-height:1.55;margin-top:6px}.mine p em{font-style:normal;color:var(--gold);font-weight:600}
+.link{display:block;width:100%;margin-top:12px;border:0;background:var(--red);color:#fff;font-size:16px;font-weight:600;border-radius:16px;padding:15px;cursor:pointer}
+.demo{font-size:12px;color:var(--mute);text-align:center;margin:16px}
+.rh{display:flex;justify-content:space-between;align-items:center;padding:24px 22px 12px}.rh h2{font-size:24px;font-weight:600}.rh button{background:var(--red);color:#fff;border:0;border-radius:8px;padding:14px 26px;font-size:20px;cursor:pointer}
+.tabs{display:flex;margin:12px 18px}.tabs button{flex:1;border:0;background:none;color:var(--red);font-size:19px;padding:18px 6px;border-bottom:4px solid transparent;cursor:pointer}.tabs button.on{background:var(--pink);border-color:var(--red)}
+.cnt{margin:14px 22px;font-size:24px;font-weight:500}
+.vc{margin:0 18px 12px;border:2px dashed var(--red);border-radius:18px;padding:16px;background:var(--box)}.vc b{font-size:19px}.vc p{color:var(--mute);font-size:14px;margin-top:4px}
+.pf{background:var(--red);height:190px}.pav{width:130px;height:130px;border-radius:50%;border:8px solid var(--red);background:#fff3;margin:-64px auto 0;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative;top:-8px;background-color:#e9c9c7}
+.pfb{background:var(--bg);border-radius:36px 36px 0 0;margin-top:-72px;padding:78px 22px 0;text-align:center;position:relative}
+.pfb h2{font-size:30px;font-weight:600;margin-top:6px}.pfb small{font-size:18px}
+.mr{display:flex;justify-content:space-between;align-items:center;padding:24px 4px;border-bottom:2px solid var(--line);font-size:22px;text-align:left}.mr i{font-style:normal;color:var(--mute)}
+.lg{margin:36px auto 0;display:block;width:80%;border:2px solid var(--ink);border-radius:40px;background:none;color:var(--ink);font-size:21px;font-weight:600;padding:20px;cursor:pointer}
+#tarot.screen.on{display:flex;flex-direction:column;min-height:100vh;margin-bottom:calc(-96px - env(safe-area-inset-bottom,0px));padding-bottom:calc(110px + env(safe-area-inset-bottom,0px));background:radial-gradient(ellipse at 50% 30%,#a02019,#4b0b08)}
+.tt{text-align:center;color:#fff;padding:30px 20px 10px}.tt h2{font-size:30px;font-weight:700}.tt p{font-weight:300;opacity:.85;margin-top:4px}
+.deck{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px 22px;flex:1;align-content:center;perspective:900px}
+.c{aspect-ratio:3/4.6;border-radius:12px;border:2px solid var(--gold);background:repeating-linear-gradient(45deg,#2a0907,#2a0907 8px,#3a0f0c 8px,#3a0f0c 16px);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:34px;cursor:pointer;transition:transform .6s,box-shadow .3s;box-shadow:0 8px 18px #0006}
+.c:hover{transform:translateY(-8px)}.c.flip{transform:rotateY(180deg) scale(1.08);background:var(--gold)}
+.c:focus-visible{outline:3px solid #fff}
+.ov{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:24px;z-index:50}.ov.on{display:flex}
+.res{background:#fff;color:#222;border:3px solid var(--gold);border-radius:22px;padding:28px 24px;max-width:380px;width:100%;text-align:center;animation:in .4s}
+.res small{color:var(--red);letter-spacing:2px;font-weight:600}.res .e{font-size:44px;margin:8px 0}
+.res p{font-size:21px;line-height:1.6}.res p em{font-style:normal;color:var(--red);font-weight:600}
+.res .bt{display:flex;gap:10px;margin-top:20px}.res button{flex:1;border:0;border-radius:14px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;background:var(--red);color:#fff}.res button.o{background:#eee;color:#333}
+#sheet{align-items:flex-end;padding:0}#sheet .res{border:0;border-radius:28px 28px 0 0;max-width:480px;padding:26px 24px calc(26px + env(safe-area-inset-bottom,0px));text-align:left}
+#sheet h3{font-size:22px;font-weight:600}#sheet .sub{color:var(--mute);margin:4px 0 18px}
+.step{display:flex;align-items:center;justify-content:space-between;font-size:20px}.step div{display:flex;align-items:center;gap:18px}.step button{flex:none;width:44px;height:44px;border-radius:50%;background:var(--pink);color:var(--red);font-size:24px;padding:0}.step b{font-size:26px;min-width:28px;text-align:center}
+.nav{position:fixed;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;background:var(--nav);border-radius:24px 24px 0 0;display:flex;padding:10px 6px calc(10px + env(safe-area-inset-bottom,0px));z-index:40}
+.nav button{flex:1;border:0;background:none;font-size:12px;color:var(--mute);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+.nav button i{font-style:normal;font-size:20px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.nav button.on{color:var(--ink);font-weight:600}.nav button.on i{background:var(--red);color:#fff}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body><div id="app">
+
+<section id="home" class="screen on">
+ <div class="hd"><div class="who"><div class="av">😋</div><div><small>ยินดีต้อนรับ</small><b>สมาชิกตี๋น้อย</b></div><div class="bell">🔔</div></div>
+  <div class="mcard"><div class="logo">🍲</div><h2>Tn Family</h2><div class="t">Member</div><div class="row"><span>Member no.<br>TN••••••••</span><span>Valid till / หมดอายุ<br>[วันหมดอายุ]</span></div></div>
+  <div class="pts">2 / 60 คะแนน</div><div class="bar"><i></i></div><small class="s">สะสมอีก 58 คะแนน เพื่อเลื่อนขั้นเป็นระดับ SILVER</small></div>
+ <div class="two"><button class="big" data-go="branches"><span>📍</span>สาขา &amp; การจอง</button><button class="big" data-go="tarot"><span>🃏</span>สุ่มไพ่ดูดวง</button></div>
+ <div class="ban"><div class="logo" style="width:54px;height:54px;font-size:24px">🍲</div><div><b>สุกี้ตี๋น้อย อร่อยไม่อั้น</b><span>ไพ่ทุกใบ ชี้ไปที่หม้อเดียวกัน</span></div></div>
+ <h3 class="sec">กิจกรรมของเรา <small>ดูทั้งหมด</small></h3>
+ <div class="acts"><div class="act" data-go="tarot"><div class="im">🔮</div><p><b>Midnight Tarot</b><br>สุ่มไพ่ก่อนไปกิน<u>ดูรายละเอียด</u></p></div><div class="act" data-go="branches"><div class="im">👀</div><p><b>อ่านคำทำนายคิวอื่น</b><br>ระหว่างรอคิว<u>ดูรายละเอียด</u></p></div></div>
+ <h3 class="sec">คูปองสุดพิเศษ <small>ดูทั้งหมด</small></h3><div id="homeCp"></div>
+</section>
+
+<section id="branches" class="screen">
+ <div class="ph"><button class="back" data-go="home" aria-label="กลับ">‹</button><h2>สาขา &amp; การจอง</h2><button class="hist"><i>🕘</i>ประวัติการจองโต๊ะล่วงหน้า</button></div>
+ <label class="srch">🔍<input id="sq" placeholder="ค้นหา"></label>
+ <div class="pills" id="pills"></div><div id="blist"></div>
+</section>
+
+<section id="queue" class="screen">
+ <div class="bar2">ตรวจสอบคิวของคุณ</div><div id="qbody"></div>
+</section>
+
+<section id="tarot" class="screen">
+ <div class="tt"><h2>เลือกไพ่ 1 ใบ</h2><p>ให้จักรวาลเลือกให้</p></div>
+ <div class="deck" id="deck"></div>
+</section>
+
+<section id="rewards" class="screen">
+ <div class="rh"><h2>รางวัลของฉัน</h2><button data-go="tarot">แลกรางวัล</button></div>
+ <div class="tabs"><button class="on" id="t1">คูปองที่ใช้ได้</button><button id="t2">ใช้แล้ว หรือหมดอายุ</button></div>
+ <div class="cnt" id="rc">มีคูปอง 0 ใบ</div><div id="rcp"></div>
+</section>
+
+<section id="profile" class="screen">
+ <div class="pf"></div>
+ <div class="pfb"><div class="pav" style="position:absolute;left:50%;top:-64px;transform:translateX(-50%);margin:0">😋</div>
+  <h2>สมาชิกตี๋น้อย</h2><small>09••••••••</small>
+  <div style="margin-top:30px"><div class="mr">ข้อมูลส่วนตัว<i>›</i></div><div class="mr">ที่อยู่<i>›</i></div><div class="mr">คำถามที่พบบ่อย<i>›</i></div><div class="mr">ข้อกำหนดและเงื่อนไข<i>›</i></div><div class="mr">ภาษา<i>ไทย ▾</i></div></div>
+  <button class="lg" id="lg">ออกจากระบบ</button><p class="demo">ออกจากระบบ หรือรีเฟรชหน้า = ล้างคิวและคำทำนายทั้งหมด</p></div>
+</section>
+
+<nav class="nav"><button class="on" data-go="home"><i>🏠</i>หน้าหลัก</button><button data-go="tarot"><i>🃏</i>สุ่มไพ่</button><button data-go="rewards"><i>🎁</i>รางวัลของฉัน</button><button data-go="profile"><i>👤</i>หน้าโปรไฟล์</button></nav>
+
+<div class="ov" id="ov"><div class="res"><small id="rtag"></small><div class="e">🍲</div><p id="rtxt"></p><div class="bt"><button id="rshare">แชร์</button><button class="o" id="rq">ดูคิว</button></div><button class="o" id="rag" style="width:100%;margin-top:10px">สุ่มใหม่</button></div></div>
+<div class="ov" id="sheet"><div class="res"><h3 id="sn"></h3><p class="sub" id="sd"></p><div class="step"><span>จำนวนลูกค้า</span><div><button id="mi">−</button><b id="pc">1</b><button id="pl">+</button></div></div><div class="bt" style="margin-top:22px"><button class="o" id="sc">ปิด</button><button id="sg">รับคิว</button></div></div></div>
+</div>
+<script>
+var M=[["ยิ่งรู้จัก ยิ่งหิว","ยิ่งกิน ยิ่งมีความสุข","บางคนเข้ามาเพื่อจากไป","แต่หมูสไลซ์เข้ามาเพื่อเรา"],
+["ความรักอาจไม่แน่นอน","คนคุยอาจไม่ชัดเจน","แต่ถ้าเป็นเรื่องหม้อสุกี้","เราชัดเจนเสมอ"],
+["ชีวิตมีขึ้นมีลง","มีสมหวัง มีผิดหวัง","แต่สิ่งหนึ่งที่แน่นอน","คืนนี้ต้องกินตี๋น้อย"],
+["บางคำตอบไม่ต้องใช้ไพ่","บางความสัมพันธ์ไม่ต้องใช้ใจ","แค่ถามตัวเองว่า","วันนี้กินอะไรหรือยัง"],
+["ไพ่บอกว่า...","ช่วงนี้มีเกณฑ์เสียเงิน","มีเกณฑ์เสียเวลา","และมีเกณฑ์ได้กินหมูไม่อั้น"],
+["จักรวาลอาจไม่ได้ส่งใครมา","แต่จักรวาลส่งความหิวมาให้","ไปตี๋น้อยเถอะ"],
+["รักแท้แพ้ระยะทาง","แต่หมูสามชั้นแพ้ไฟแรง"],
+["อย่าถามหาความชัดเจน","ถ้ายังไม่ชัดว่าจะกินอะไร"],
+["คนเราต้องมีความหวัง","อย่างน้อยคืนนี้ก็หวังว่า","จะไม่ต้องรอคิวนาน"],
+["บางเรื่องปล่อยวางได้","แต่หมูในหม้อปล่อยไม่ได้"],
+["ทุกโลกมีเรื่องเล่า","ทุกโลกมีเอกลักษณ์","ส่วนโลกเรามีเรื่องกินไม่รู้จบ"],
+["ทุกโลกมีความลับ","ทุกโลกมีคำทำนาย","แต่คำตอบสุดท้ายคือหิว"],
+["เพื่อนที่ดีอาจหาไม่ง่าย","แต่เพื่อนที่ชวนกินตี๋น้อย","หาได้จากการแท็กคนนี้"],
+["ปัญหาชีวิตมีเป็นร้อย","แต่ปัญหาที่แก้ได้ทันที","คือการหาอะไรกิน","ไปตี๋น้อยกันไหม?"],
+["เรื่องอื่นเอาไว้ก่อน","เรื่องงานเอาไว้ทีหลัง","ตอนนี้มีเรื่องเดียวที่สำคัญ","กินอะไรดี?"],
+["ไพ่บอกว่าในช่วงนี้","คุณอาจกำลังต้องการความสุข","ต้องการใครสักคนอยู่ข้างๆ","และที่สำคัญที่สุด","คุณกำลังต้องการหมูสามชั้น","ไพ่แนะนำให้ไปตี๋น้อย"]];
+var T=["THE POT","THE EGG","THE FLAME","THE CHOPSTICKS","THE SAUCE","THE QUEUE","THE FOOL"],E=["🍲","🥚","🔥","🥢","🌶️","🎟️","🃏"];
+var BR=[["สุกี้ตี๋น้อย บ้านบางเขน","0.7",4],["สุกี้ตี๋น้อย เกษตรนวมินทร์","3.0",2],["สุกี้ตี๋น้อย รามอินทรา 23","3.1",0],["สุกี้ตี๋น้อย เมเจอร์ รัชโยธิน","5.1",7],["สุกี้ตี๋น้อย ลาดพร้าว-วังหิน","5.6",3],["สุกี้ตี๋น้อย พหลโยธิน 19","6.2",1]];
+var PL=["All","สุกี้ตี๋น้อย","ตี๋น้อย บาร์บีคิว","ตี๋น้อยโกลด์"];
+var $=function(i){return document.getElementById(i)};
+var S={mine:null,q:null,feed:[],pill:"All",pick:null,pc:1},timer=null;
+function html(l){return l.slice(0,-1).join("<br>")+"<br><em>"+l[l.length-1]+"</em>"}
+function pick(){var i=Math.floor(Math.random()*M.length),t=Math.floor(Math.random()*T.length);return{l:M[i],t:T[t],e:E[t]}}
+function pad(n,w){n=String(n);while(n.length<(w||2))n="0"+n;return n}
+function qn(n){return "A"+pad(n,3)}
+var cur="home";
+function go(n){cur=n;document.querySelectorAll(".screen").forEach(function(s){s.classList.toggle("on",s.id===n)});
+ var nv=n==="branches"||n==="queue"?"home":n;
+ document.querySelectorAll(".nav button").forEach(function(b){b.classList.toggle("on",b.dataset.go===nv)});
+ document.body.classList.toggle("grey",n==="queue");window.scrollTo(0,0);
+ if(n==="tarot")deal();if(n==="branches")rBranches();if(n==="queue")rQueue();if(n==="rewards"||n==="home")rCp()}
+document.addEventListener("click",function(e){var g=e.target.closest("[data-go]");if(g)go(g.dataset.go)});
+/* branches */
+function rBranches(){
+ $("pills").innerHTML=PL.map(function(p){return '<button class="pill'+(p===S.pill?" on":"")+'" data-p="'+p+'">'+p+"</button>"}).join("");
+ var q=$("sq").value.trim(),h="";
+ BR.forEach(function(b,i){if(S.pill!=="All"&&S.pill!=="สุกี้ตี๋น้อย")return;if(q&&b[0].indexOf(q)<0)return;
+  h+='<button class="br" data-b="'+i+'"><b>📍 '+b[0]+'</b><div><span>'+b[1]+' กม.</span><em>จำนวนคิว '+b[2]+' คิว</em></div></button>'});
+ $("blist").innerHTML=(h||'<div class="empty"><b>ไม่พบสาขา</b></div>')+'<p class="demo">จำนวนคิวเป็นข้อมูลตัวอย่าง</p>'}
+$("pills").addEventListener("click",function(e){var p=e.target.dataset.p;if(p){S.pill=p;rBranches()}});
+$("sq").addEventListener("input",rBranches);
+$("blist").addEventListener("click",function(e){var b=e.target.closest("[data-b]");if(!b)return;S.pick=+b.dataset.b;S.pc=1;sheet()});
+function sheet(){var b=BR[S.pick];$("sn").textContent=b[0];$("pc").textContent=S.pc;
+ if(S.q){$("sd").textContent="คุณมีคิวอยู่แล้วที่ "+S.q.b;$("sg").textContent="ดูคิวของฉัน"}
+ else{$("sd").textContent="ตอนนี้มี "+b[2]+" คิว กดรับคิวเพื่อรับหมายเลขคิวของคุณ";$("sg").textContent="รับคิว"}
+ $("sheet").classList.add("on")}
+$("mi").onclick=function(){if(S.pc>1){S.pc--;$("pc").textContent=S.pc}};$("pl").onclick=function(){if(S.pc<10){S.pc++;$("pc").textContent=S.pc}};
+$("sc").onclick=function(){$("sheet").classList.remove("on")};
+$("sheet").addEventListener("click",function(e){if(e.target.id==="sheet")$("sheet").classList.remove("on")});
+$("sg").onclick=function(){$("sheet").classList.remove("on");if(!S.q){var b=BR[S.pick],c=8;S.q={b:b[0],n:S.pc,cur:c,num:c+b[2]+1,t:new Date()};
+  S.feed=[];for(var k=7;k>=4;k--)S.feed.unshift({n:k,r:pick()});start()}go("queue")};
+function start(){clearInterval(timer);timer=setInterval(function(){if(!S.q||S.q.cur>=S.q.num){clearInterval(timer);return}
+ S.q.cur++;S.feed.unshift({n:S.q.cur-1,r:pick()});if(S.q.cur>=S.q.num)clearInterval(timer);if(cur==="queue")rQueue()},6000)}
+/* queue */
+function d2(t){return pad(t.getDate())+"/"+pad(t.getMonth()+1)+"/"+t.getFullYear()+" "+pad(t.getHours())+":"+pad(t.getMinutes())+":"+pad(t.getSeconds())}
+function rQueue(){var q=S.q,el=$("qbody");
+ if(!q){el.innerHTML='<div class="empty"><div class="tk">🎟️</div><b>ยังไม่มีคิว</b>เลือกสาขาและกดรับคิวก่อน<button class="link" data-go="branches">สาขา &amp; การจอง</button></div>';return}
+ var w=Math.max(0,q.num-q.cur-1),mine=S.mine?'<div class="mine"><small>คำทำนายของคุณ · '+S.mine.t+'</small><p>'+html(S.mine.l)+'</p></div>':'<button class="link" data-go="tarot">🃏 สุ่มไพ่ระหว่างรอ</button>';
+ var f=S.feed.slice(0,8).map(function(x){return '<div class="f"><div class="top"><b>คิว '+qn(x.n)+'</b><span>'+x.r.e+" "+x.r.t+'</span></div><p>'+html(x.r.l)+"</p></div>"}).join("");
+ el.innerHTML='<div class="box"><div class="bh"><div class="logo">🍲</div><div><b>'+q.b+'</b><small>📍 Teenoi Family</small><small>🕒 คิวทั้งหมด: <em>'+(w+1)+' คิว</em></small></div></div>'
+ +'<div class="qrow"><div class="q me"><small>คิวของคุณ</small><b>'+qn(q.num)+'</b></div><div class="q"><small>คิวปัจจุบัน</small><b class="s">'+qn(q.cur)+'</b><hr><small>รอคิว</small><b class="s">'+w+'</b></div></div>'
+ +(q.cur>=q.num?'<div class="go"><b>ถึงคิวของคุณแล้ว 🎉</b>เชิญที่ร้านได้เลย</div>':'')+mine
+ +'<div class="dt"><div class="d">'+d2(q.t)+'</div><div class="r"><span>ประเภท</span><span>A</span></div><div class="r"><span>จำนวนลูกค้า</span><span>'+q.n+'</span></div><p>* ขอสงวนสิทธิ์ในการข้ามคิวหากลูกค้าไม่มาแสดงตน</p><p>* ขอสงวนสิทธิ์การยกเลิกเมื่อมีการซื้อขายหรือแลกเปลี่ยน</p></div><button class="cx" id="cx">ยกเลิกคิว</button></div>'
+ +'<div class="fs"><h3>คิวอื่นๆ ได้คำทำนายว่า</h3><small>ข้อมูลตัวอย่าง</small></div>'+f;
+ $("cx").onclick=function(){if(confirm("ยกเลิกคิวนี้ใช่ไหม")){S.q=null;S.feed=[];clearInterval(timer);go("branches")}}}
+/* tarot */
+function deal(){var d=$("deck");d.innerHTML="";for(var i=0;i<6;i++){var c=document.createElement("button");c.className="c";c.setAttribute("aria-label","ไพ่ใบที่ "+(i+1));c.textContent="✦";c.onclick=draw;d.appendChild(c)}}
+function draw(e){var c=e.currentTarget;if(document.querySelector(".c.flip"))return;c.classList.add("flip");c.textContent=" ";
+ var r=pick();S.mine=r;setTimeout(function(){$("rtag").textContent=r.t;document.querySelector("#ov .e").textContent=r.e;$("rtxt").innerHTML=html(r.l);$("ov").classList.add("on");rCp()},750)}
+$("ov").addEventListener("click",function(e){if(e.target===$("ov")||e.target.id==="rag"){$("ov").classList.remove("on");deal()}});
+$("rq").onclick=function(){$("ov").classList.remove("on");go(S.q?"queue":"branches")};
+$("rshare").onclick=function(){var t="ฉันสุ่มไพ่ Teenoi Midnight Tarot ได้ "+S.mine.t+" ดวงบอกให้ไปตี๋น้อย 🍲";if(navigator.share){navigator.share({text:t})}else{alert("ข้อความสำหรับแชร์:\n"+t)}};
+/* rewards */
+var used=false;
+function rCp(){var v='<div class="vc"><b>🧧 ยันต์เสริมดวง</b><p>สิทธิพิเศษจากการสุ่มไพ่ [รายละเอียดตามที่ร้านกำหนด] · ตัวอย่าง</p></div>',
+ em='<div class="empty"><div class="tk">🎫</div><b>ยังไม่มีคูปองในขณะนี้</b>เรากำลังรวบรวมคูปองพิเศษให้คุณ<br>สุ่มไพ่เพื่อรับยันต์เสริมดวง</div>';
+ $("homeCp").innerHTML=S.mine?v:em;$("rcp").innerHTML=used?em:(S.mine?v:em);$("rc").textContent="มีคูปอง "+(!used&&S.mine?1:0)+" ใบ"}
+$("t1").onclick=function(){used=false;$("t1").className="on";$("t2").className="";rCp()};
+$("t2").onclick=function(){used=true;$("t2").className="on";$("t1").className="";rCp()};
+$("lg").onclick=function(){clearInterval(timer);S={mine:null,q:null,feed:[],pill:"All",pick:null,pc:1};used=false;$("sq").value="";go("home")};
+rCp();
+</script></body></html>

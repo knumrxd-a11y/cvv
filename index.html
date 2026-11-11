@@ -118,6 +118,12 @@ h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify
 .dv{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:16px 12px 10px}
 .res .bl{display:block;letter-spacing:0;color:#8a6a2a;font-weight:400;font-size:14px}
 .lk{margin-top:12px;font-size:13px;background:#0003;border:1px solid #f2b63255;border-radius:12px;padding:8px 12px;text-align:center;font-weight:300}.lk b{color:var(--gold);font-weight:600}
+#ov .res{max-height:94vh;overflow:auto}
+#rimg,.hint{display:none}
+.hasimg>#rimg{display:block;max-height:54vh;max-width:100%;margin:0 auto;border-radius:14px;box-shadow:0 8px 24px #0004}
+.hasimg>.hint{display:block;font-size:12px;color:#8a6a2a;margin-top:8px}
+.hasimg>small,.hasimg>.e,.hasimg>p,.hasimg>.dv{display:none}
+.res.hasimg{padding:16px}.res.hasimg>.bl{display:none}
 </style></head><body><div id="app">
 
 <section id="home" class="screen on">
@@ -167,7 +173,7 @@ h3.sec{font-size:22px;font-weight:600;margin:24px 18px 10px;display:flex;justify
 
 <nav class="nav"><button class="on" data-go="home"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></i>หน้าหลัก</button><button data-go="tarot"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg></i>สุ่มไพ่</button><button data-go="rewards"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M12 8v13M3 12h18M12 8c-3-5-7-2-4 0M12 8c3-5 7-2 4 0"/></svg></i>รางวัลของฉัน</button><button data-go="profile"><i><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></i>หน้าโปรไฟล์</button></nav>
 
-<div class="ov" id="ov"><div class="res"><small id="rtag"></small><div class="e">✦</div><p id="rtxt"></p><div class="dv"></div><small class="bl">ขอให้สมหวังดังที่ตั้งจิตอธิษฐาน</small><div class="bt"><button id="rshare">แชร์</button><button class="o" id="rq">ดูคิว</button></div><button class="o" id="rag" style="width:100%;margin-top:10px">สุ่มใหม่</button></div></div>
+<div class="ov" id="ov"><div class="res"><img id="rimg" alt="ไพ่ของคุณ"><div class="hint">กดค้างที่รูปเพื่อบันทึก หรือกดปุ่มด้านล่าง</div><small id="rtag"></small><div class="e">✦</div><p id="rtxt"></p><div class="dv"></div><small class="bl">ขอให้สมหวังดังที่ตั้งจิตอธิษฐาน</small><div class="bt"><button id="rsave">บันทึกรูป</button><button id="rshare">แชร์</button></div><div class="bt" style="margin-top:10px"><button class="o" id="rq">ดูคิว</button><button class="o" id="rag">สุ่มใหม่</button></div></div></div>
 <div class="ov" id="sheet"><div class="res"><h3 id="sn"></h3><p class="sub" id="sd"></p><div class="step"><span>จำนวนลูกค้า</span><div><button id="mi">−</button><b id="pc">1</b><button id="pl">+</button></div></div><div class="bt" style="margin-top:22px"><button class="o" id="sc">ปิด</button><button id="sg">รับคิว</button></div></div></div>
 </div>
 <script>
@@ -239,10 +245,9 @@ function rQueue(){var q=S.q,el=$("qbody");
 /* tarot */
 function deal(){var d=$("deck");d.innerHTML="";for(var i=0;i<6;i++){var c=document.createElement("button");c.className="c";c.setAttribute("aria-label","ไพ่ใบที่ "+(i+1));c.textContent="✦";c.onclick=draw;d.appendChild(c)}}
 function draw(e){var c=e.currentTarget;if(document.querySelector(".c.flip"))return;c.classList.add("flip");c.textContent=" ";
- var r=pick();S.mine=r;setTimeout(function(){$("rtag").textContent=r.t;document.querySelector("#ov .e").textContent=r.e;$("rtxt").innerHTML=html(r.l);$("ov").classList.add("on");rCp()},750)}
+ var r=pick();S.mine=r;setTimeout(function(){$("rtag").textContent=r.t;document.querySelector("#ov .e").textContent=r.e;$("rtxt").innerHTML=html(r.l);$("ov").classList.add("on");rCp();mkImg(r)},750)}
 $("ov").addEventListener("click",function(e){if(e.target===$("ov")||e.target.id==="rag"){$("ov").classList.remove("on");deal()}});
 $("rq").onclick=function(){$("ov").classList.remove("on");go(S.q?"queue":"branches")};
-$("rshare").onclick=function(){var t="ฉันสุ่มไพ่ Teenoi Midnight Tarot ได้ "+S.mine.t+" ดวงบอกให้ไปตี๋น้อย";if(navigator.share){navigator.share({text:t})}else{alert("ข้อความสำหรับแชร์:\n"+t)}};
 /* rewards */
 var used=false;
 function rCp(){var v='<div class="vc"><b>ยันต์เสริมดวง</b><p>สิทธิพิเศษจากการสุ่มไพ่ [รายละเอียดตามที่ร้านกำหนด] · ตัวอย่าง</p></div>',
@@ -252,6 +257,47 @@ $("t1").onclick=function(){used=false;$("t1").className="on";$("t2").className="
 $("t2").onclick=function(){used=true;$("t2").className="on";$("t1").className="";rCp()};
 $("lg").onclick=function(){clearInterval(timer);S={mine:null,q:null,feed:[],pill:"All",pick:null,pc:1};used=false;$("sq").value="";go("home")};
 rCp();
+/* shareable card image */
+var TH=["หม้อสุกี้","ไข่แดง","เปลวไฟ","ตะเกียบ","น้ำจิ้ม","คิว","ผู้ไม่กลัวหิว"],TK=0,IU=null,GD="#E8B84A";
+function rr(c,x,y,w,h,q){c.beginPath();c.moveTo(x+q,y);c.arcTo(x+w,y,x+w,y+h,q);c.arcTo(x+w,y+h,x,y+h,q);c.arcTo(x,y+h,x,y,q);c.arcTo(x,y,x+w,y,q);c.closePath()}
+function sp(t){return t.split("").join(" ")}
+function ft(c,t,wt,sz,w){while(sz>24){c.font=wt+" "+sz+"px Kanit,sans-serif";if(c.measureText(t).width<=w)break;sz-=2}}
+function mand(c,R,n){var k,a;c.strokeStyle=GD;
+ [1,.9,.64,.4].forEach(function(f,i){c.lineWidth=i?2:4;c.beginPath();c.arc(0,0,R*f,0,7);c.stroke()});
+ for(k=0;k<n*2;k++){c.save();c.rotate(k*Math.PI/n);c.fillStyle=GD;c.beginPath();c.arc(0,-R*.95,k%2?4:7,0,7);c.fill();c.restore()}
+ for(k=0;k<n;k++){c.save();c.rotate(k*2*Math.PI/n);c.lineWidth=2.5;c.fillStyle="rgba(232,184,74,.16)";c.beginPath();c.moveTo(0,-R*.4);c.quadraticCurveTo(R*.2,-R*.64,0,-R*.9);c.quadraticCurveTo(-R*.2,-R*.64,0,-R*.4);c.fill();c.stroke();c.beginPath();c.moveTo(0,-R*.9);c.lineTo(0,-R);c.stroke();c.restore()}
+ c.fillStyle=GD;c.beginPath();for(k=0;k<16;k++){a=k*Math.PI/8;var d=k%2?R*.1:R*.24;c.lineTo(Math.sin(a)*d,-Math.cos(a)*d)}c.closePath();c.fill();
+ c.fillStyle="#3a0f0c";c.beginPath();c.arc(0,0,R*.06,0,7);c.fill()}
+function paint(c,r,lg){var W=1080,H=1920,i=Math.max(0,T.indexOf(r.t)),N=[8,12,10,16,9,14,6][i],k,sd=i*977+13;
+ function rnd(){sd=sd*16807%2147483647;return sd/2147483647}
+ var g=c.createRadialGradient(540,700,60,540,700,1300);g.addColorStop(0,"#8a1a14");g.addColorStop(.55,"#3d0a07");g.addColorStop(1,"#140302");c.fillStyle=g;c.fillRect(0,0,W,H);
+ c.strokeStyle="rgba(232,184,74,.10)";c.lineWidth=2;for(k=1;k<26;k++){c.beginPath();c.arc(540,700,k*50,0,7);c.stroke()}
+ for(k=0;k<140;k++){c.fillStyle="rgba(255,225,160,"+(.15+rnd()*.5)+")";c.beginPath();c.arc(rnd()*W,rnd()*H,.8+rnd()*2.2,0,7);c.fill()}
+ c.strokeStyle=GD;c.lineWidth=4;rr(c,40,40,W-80,H-80,36);c.stroke();c.lineWidth=1.5;rr(c,62,62,W-124,H-124,26);c.stroke();
+ c.textAlign="center";c.fillStyle=GD;c.font="600 32px Kanit,sans-serif";c.fillText(sp("MIDNIGHT TAROT"),540,130);
+ var x0=170,y0=190,w=740,h=900,cg=c.createLinearGradient(0,y0,0,y0+h);cg.addColorStop(0,"#2a0907");cg.addColorStop(1,"#4a0f0b");
+ c.fillStyle=cg;rr(c,x0,y0,w,h,28);c.fill();c.strokeStyle=GD;c.lineWidth=5;c.stroke();c.lineWidth=1.5;rr(c,x0+18,y0+18,w-36,h-36,18);c.stroke();
+ [[x0+18,y0+18],[x0+w-18,y0+18],[x0+18,y0+h-18],[x0+w-18,y0+h-18]].forEach(function(p){c.save();c.translate(p[0],p[1]);c.rotate(Math.PI/4);c.fillStyle=GD;c.fillRect(-9,-9,18,18);c.restore()});
+ c.fillStyle=GD;c.font="600 46px Kanit,sans-serif";c.fillText(["I","II","III","IV","V","VI","VII"][i],540,y0+96);
+ c.fillRect(300,y0+76,120,2);c.fillRect(660,y0+76,120,2);
+ c.save();c.translate(540,y0+425);mand(c,272,N);c.restore();
+ c.fillStyle="#fff3dc";c.font="700 66px Kanit,sans-serif";c.fillText(sp(r.t),540,y0+h-110);
+ c.fillStyle=GD;c.font="300 40px Kanit,sans-serif";c.fillText("ไพ่"+TH[i],540,y0+h-52);
+ var L=r.l,y=1232;for(k=0;k<L.length;k++){var last=k===L.length-1;if(last)y+=12;c.fillStyle=last?GD:"#f6ebdc";ft(c,L[k],last?"600":"300",last?54:46,880);c.fillText(L[k],540,y);y+=66}
+ c.fillStyle="rgba(232,184,74,.5)";c.fillRect(240,1650,600,2);
+ if(lg){c.save();c.beginPath();c.arc(375,1745,80,0,7);c.clip();c.drawImage(lg,295,1665,160,160);c.restore();c.strokeStyle=GD;c.lineWidth=4;c.beginPath();c.arc(375,1745,82,0,7);c.stroke()}
+ c.textAlign="left";c.fillStyle=GD;c.font="600 46px Kanit,sans-serif";c.fillText("ดวงดีที่ตี๋น้อย",490,1740);
+ c.fillStyle="#f6ebdc";c.font="300 34px Kanit,sans-serif";c.fillText("มากินตี๋น้อยด้วยกันนะ",490,1790);
+ var dt="";try{dt=new Date().toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"})}catch(e){}
+ c.fillStyle="rgba(246,235,220,.55)";c.font="300 26px Kanit,sans-serif";c.fillText(dt,490,1832)}
+function mk(r,cb){var cv=document.createElement("canvas");cv.width=1080;cv.height=1920;var c=cv.getContext("2d"),f=document.fonts&&document.fonts.load?Promise.all([document.fonts.load("600 40px Kanit"),document.fonts.load("300 40px Kanit")]):Promise.resolve();
+ f.catch(function(){}).then(function(){var lg=new Image();lg.onload=lg.onerror=function(){paint(c,r,lg.naturalWidth?lg:null);cv.toBlob(function(b){if(b)cb(b)},"image/png")};lg.src=document.querySelector("link[rel=apple-touch-icon]").href})}
+function mkImg(r){var k=++TK,rs=$("ov").querySelector(".res");rs.classList.remove("hasimg");S.img=null;
+ mk(r,function(b){if(k!==TK)return;S.img=b;if(IU)URL.revokeObjectURL(IU);IU=URL.createObjectURL(b);$("rimg").src=IU;rs.classList.add("hasimg")})}
+$("rsave").onclick=function(){if(!S.img)return;var a=document.createElement("a");a.href=IU;a.download="teenoi-tarot.png";document.body.appendChild(a);a.click();a.remove()};
+$("rshare").onclick=function(){var t="ฉันสุ่มไพ่ได้ "+S.mine.t+" ดวงบอกให้ไปกินตี๋น้อย";
+ if(S.img){var f=new File([S.img],"teenoi-tarot.png",{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:t}).catch(function(){});return}}
+ if(navigator.share)navigator.share({text:t}).catch(function(){});else $("rsave").click()};
 /* fortune while waiting */
 var RL=["ความรัก","การเงิน","การงาน"];
 var DY=[["วันอาทิตย์","มีคนใส่ใจคุณอยู่ใกล้ๆ มากกว่าที่คิด","เงินเข้าดี แต่ระวังรายจ่ายตอนหิว","งานราบรื่น ถ้าพักกินข้าวตรงเวลา"],
